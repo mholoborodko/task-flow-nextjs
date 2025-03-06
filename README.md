@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+TaskFlow
 
-## Getting Started
+TaskFlow is a powerful task management application inspired by Trello and Jira. It allows users to organize work, track progress, and efficiently manage tasks.
 
-First, run the development server:
+🚀 Technologies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Next.js + TypeScript - Modern stack for SSR, ISR, and CSR.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Zustand - Lightweight state management.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Supabase - Database and real-time updates.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tailwind CSS - Styling and theming.
 
-## Learn More
+@hello-pangea/dnd - Drag & Drop for tasks.
 
-To learn more about Next.js, take a look at the following resources:
+React Toastify - Notifications.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Framer Motion - Animations.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Husky - Git hooks for code quality improvement.
 
-## Deploy on Vercel
+PWA - Offline mode and push notifications.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📌 Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+✅ Create, edit, and delete tasks
+✅ Drag & Drop to move tasks between columns
+✅ Persist tasks in Supabase
+✅ Real-time task updates via Supabase Realtime
+✅ Task search and filtering
+✅ Animations and theming
+✅ PWA support (offline mode, push notifications)
+
+📌 License
+
+This project is licensed under the MIT license.

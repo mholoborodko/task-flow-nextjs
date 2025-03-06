@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "prepare": "husky install && husky add .husky/pre-commit 'npx lint-staged' && husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'"
+    "prepare": "husky install && husky add .husky/pre-commit 'npx lint-staged' && husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'",
+    "commit": "cz"
   },
   "dependencies": {
     "next": "15.2.1",
@@ -30,7 +31,9 @@
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
     "autoprefixer": "^10.4.20",
+    "commitizen": "^4.3.1",
     "commitlint": "^19.7.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.21.0",
     "eslint-config-next": "15.2.1",
     "eslint-config-prettier": "^10.0.2",
@@ -54,5 +57,10 @@
       "prettier --write"
     ],
     "*.{json,md,css,scss,yaml}": "prettier --write"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
