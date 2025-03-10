@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   description: 'Task flow application',
 };
 
-export default function RootLayout({
+export const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en">
       <body
@@ -31,4 +31,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

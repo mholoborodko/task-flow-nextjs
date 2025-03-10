@@ -1,11 +1,14 @@
 'use client';
 
+import clsx from 'clsx';
 import React from 'react';
 
 export enum ButtonVariant {
   PRIMARY = 'PRIMARY',
   SECONDARY = 'SECONDARY',
-  OUTLINE = 'OUTLINE',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  DANGER = 'DANGER',
 }
 
 type ButtonProps = {
@@ -16,10 +19,11 @@ type ButtonProps = {
 };
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  [ButtonVariant.PRIMARY]: 'bg-blue-600 hover:bg-blue-700 text-white',
-  [ButtonVariant.SECONDARY]: 'bg-gray-600 hover:bg-gray-700 text-white',
-  [ButtonVariant.OUTLINE]:
-    'border border-gray-600 text-gray-600 hover:bg-gray-100',
+  [ButtonVariant.PRIMARY]: 'bg-blue-500 hover:bg-blue-600 text-white',
+  [ButtonVariant.SECONDARY]: 'bg-gray-500 hover:bg-gray-600 text-white',
+  [ButtonVariant.SUCCESS]: 'bg-green-500 hover:bg-green-600 text-white',
+  [ButtonVariant.WARNING]: 'bg-yellow-500 hover:bg-yellow-600 text-black',
+  [ButtonVariant.DANGER]: 'bg-red-500 hover:bg-red-600 text-white',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -30,7 +34,10 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`px-4 py-2 rounded-md transition ${buttonStyles[variant]} ${className}`}
+      className={clsx(
+        `px-4 py-2 rounded-md transition ${buttonStyles[variant]}`,
+        className
+      )}
       onClick={onClick}
     >
       {children}
