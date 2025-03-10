@@ -1,8 +1,0 @@
-node_modules/
-dist/
-build/
-public/
-package-lock.json
-yarn.lock
-*.min.js
-*.bundle.js
