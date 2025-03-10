@@ -1,10 +1,10 @@
-import { TaskList } from '@/components/shared/TaskList';
+import Board from '@/components/pages/Board';
 
 export const HomePage = () => {
   return (
-    <main className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Task list</h1>
-      <TaskList />
+    <main className="p-6">
+      <h1 className="text-2xl font-bold mb-4 text-black">Task list</h1>
+      <Board />
     </main>
   );
 };
