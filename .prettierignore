@@ -1,0 +1,14 @@
+# Node modules and build output
+/node_modules
+/.next
+/out
+
+# Logs and environment files
+npm-debug.log*
+yarn-debug.log*
+.env*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
