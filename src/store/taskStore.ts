@@ -18,6 +18,7 @@ export type TaskStore = {
   addTask: (task: Task) => void;
   removeTask: (id: string) => void;
   updateTask: (id: string, updatedTask: Partial<Task>) => void;
+  moveTask: (id: string, newStatus: TaskStatus, newIndex: number) => void;
 };
 
 export const useTaskStore = create<TaskStore>(set => ({
@@ -31,4 +32,25 @@ export const useTaskStore = create<TaskStore>(set => ({
         task.id === id ? { ...task, ...updatedTask } : task
       ),
     })),
+  moveTask: (id, newStatus, newIndex) =>
+    set(state => {
+      const taskToMove = state.tasks.find(task => task.id === id);
+      if (!taskToMove) return state;
+
+      const updatedTasks = state.tasks.filter(task => task.id !== id);
+
+      const tasksWithNewStatus = updatedTasks.filter(
+        task => task.status === newStatus
+      );
+      const tasksWithoutNewStatus = updatedTasks.filter(
+        task => task.status !== newStatus
+      );
+
+      tasksWithNewStatus.splice(newIndex, 0, {
+        ...taskToMove,
+        status: newStatus,
+      });
+
+      return { tasks: [...tasksWithoutNewStatus, ...tasksWithNewStatus] };
+    }),
 }));

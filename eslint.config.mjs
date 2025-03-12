@@ -84,7 +84,7 @@ export default [
       'jsx-a11y/no-autofocus': 'warn',
       'jsx-a11y/label-has-associated-control': 'error',
       'jsx-a11y/no-static-element-interactions': 'warn',
-      'jsx-a11y/click-events-have-key-events': 'warn',
+      'jsx-a11y/click-events-have-key-events': 'off',
       'no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
