@@ -22,39 +22,7 @@ export type TaskStore = {
 };
 
 export const useTaskStore = create<TaskStore>(set => ({
-  tasks: [
-    {
-      id: '1',
-      title: 'Настроить проект',
-      description:
-        'Инициализировать Next.js, настроить ESLint, Prettier и Husky',
-      status: TaskStatus.TO_DO,
-    },
-    {
-      id: '2',
-      title: 'Создать UI-компоненты',
-      description: 'Реализовать Button, Modal, TextInput, TaskCard',
-      status: TaskStatus.IN_PROGRESS,
-    },
-    {
-      id: '3',
-      title: 'Добавить drag & drop',
-      description: 'Реализовать перетаскивание задач через @hello-pangea/dnd',
-      status: TaskStatus.DONE,
-    },
-    {
-      id: '4',
-      title: 'Подключить Zustand',
-      description: 'Создать хранилище для задач и настроить Zustand',
-      status: TaskStatus.TO_DO,
-    },
-    {
-      id: '5',
-      title: 'Сохранение в Supabase',
-      description: 'Настроить загрузку и сохранение задач в базу данных',
-      status: TaskStatus.IN_PROGRESS,
-    },
-  ],
+  tasks: [],
   addTask: task => set(state => ({ tasks: [...state.tasks, task] })),
   removeTask: id =>
     set(state => ({ tasks: state.tasks.filter(task => task.id !== id) })),
