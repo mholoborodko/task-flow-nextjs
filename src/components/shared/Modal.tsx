@@ -52,7 +52,7 @@ export const Modal: React.FC<ModalProps> = ({
         className="absolute top-1 right-2 p-1 rounded-full hover:opacity-80"
         onClick={onClose}
       >
-        <Icon name="close" size={24} />
+        <Icon name="close" size={20} />
       </button>
 
       {children}

@@ -15,15 +15,14 @@ export const TextInput: React.FC<TextInputProps> = ({
   className = '',
 }) => {
   return (
-    <input
-      className={clsx(
-        'px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500',
-        className
-      )}
-      placeholder={placeholder}
-      type="text"
-      value={value}
-      onChange={onChange}
-    />
+    <div className={clsx('w-full', className)}>
+      <input
+        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder={placeholder}
+        type="text"
+        value={value}
+        onChange={onChange}
+      />
+    </div>
   );
 };
