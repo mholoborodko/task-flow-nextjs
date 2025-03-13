@@ -57,11 +57,11 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix .",
-      "prettier --write . --ignore-unknown"
+      "eslint --fix",
+      "prettier --write"
     ],
     "*.{json,md,css,scss,yaml}": [
-      "prettier --write . --ignore-unknown"
+      "prettier --write"
     ]
   }
 }
