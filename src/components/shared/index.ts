@@ -1,6 +1,9 @@
 export { Button } from './Button';
 export { TextInput } from './TextInput';
-export { Card } from './Card';
 export { Modal } from './Modal';
 export { EmptyState } from './EmptyState';
 export { Icon } from './Icon';
+export { Toaster } from './Toaster';
+export { TaskCard } from './TaskCard';
+export { TaskList } from './TaskList';
+export { Loader } from './Loader';

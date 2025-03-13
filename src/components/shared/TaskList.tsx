@@ -1,6 +1,7 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 
-import { Task, TaskStatus, useTaskStore } from '@/store/taskStore';
+import { Task, TaskStatus } from '@/entities/Task';
+import { useTaskStore } from '@/store/taskStore';
 
 import { TaskCard } from './TaskCard';
 
@@ -9,7 +10,7 @@ interface TaskListProps {
   tasks: Task[];
 }
 
-const TaskList = ({ status, tasks }: TaskListProps) => {
+export const TaskList = ({ status, tasks }: TaskListProps) => {
   const { removeTask } = useTaskStore();
   const filteredTasks = tasks.filter(task => task.status === status);
 

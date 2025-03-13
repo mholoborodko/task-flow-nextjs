@@ -11,6 +11,7 @@ export interface ModalProps {
   className?: string;
   isOpen: boolean;
   onClose: () => void;
+  onAfterClose?: () => void;
   children: React.ReactNode;
 }
 
@@ -19,6 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
   className,
   isOpen,
   onClose,
+  onAfterClose,
   children,
 }) => {
   const [isClient, setIsClient] = useState(false);
@@ -31,6 +33,12 @@ export const Modal: React.FC<ModalProps> = ({
       ReactModal.setAppElement(appElement);
     }
   }, []);
+
+  useEffect(() => {
+    if (!isOpen && onAfterClose) {
+      onAfterClose();
+    }
+  }, [isOpen, onAfterClose]);
 
   if (!isClient) return null;
 

@@ -4,7 +4,7 @@ import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 
 import { TaskStatus, useTaskStore } from '@/store/taskStore';
 
-import TaskList from '../shared/TaskList';
+import { TaskList } from '../shared';
 
 const Board = () => {
   const { tasks, moveTask } = useTaskStore();

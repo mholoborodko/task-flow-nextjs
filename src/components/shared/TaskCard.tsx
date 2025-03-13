@@ -1,4 +1,4 @@
-import { Task } from '@/store/taskStore';
+import { Task } from '@/entities/Task';
 
 import { Button, ButtonVariant } from './Button';
 

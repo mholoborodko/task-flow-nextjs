@@ -1,1 +1,2 @@
-export { AddBoardButton } from './AddBoardButton';
+export { BoardCard } from './BoardCard';
+export { BoardList } from './BoardList';

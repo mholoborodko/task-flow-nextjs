@@ -1,40 +1,38 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
 
-import { AddBoardButton } from '@/components/boards';
-import { EmptyState } from '@/components/shared';
+import { BoardList } from '@/components/boards';
+import { Button, Loader } from '@/components/shared';
+import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
+import { useToggle } from '@/hooks';
 import { useBoardStore } from '@/store/useBoardStore';
 
 export default function HomePage() {
-  const { boards } = useBoardStore();
-  const router = useRouter();
+  const { fetchBoards, isLoading } = useBoardStore();
+  const createOrUpdateBoardModalSwitcher = useToggle(false);
+
+  useEffect(() => {
+    fetchBoards();
+  }, [fetchBoards]);
 
   return (
-    <div className="flex flex-col h-full p-6 ">
+    <div className="flex flex-col h-full p-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold mb-4 text-blue-950">Boards</h1>
-        <AddBoardButton />
+        <Button onClick={createOrUpdateBoardModalSwitcher.on}>Add board</Button>
       </div>
-      {!boards.length && (
+      {isLoading ? (
         <div className="flex-center h-full">
-          <EmptyState message="No boards here yet" />
+          <Loader size={50} />
         </div>
+      ) : (
+        <BoardList />
       )}
-      {!!boards.length && (
-        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {boards.map(board => (
-            <div
-              key={board.id}
-              className="p-4 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300 transition"
-              role="button"
-              onClick={() => router.push(`/board/${board.id}`)}
-            >
-              {board.title}
-            </div>
-          ))}
-        </div>
-      )}
+      <CreateOrUpdateBoardModal
+        isOpen={createOrUpdateBoardModalSwitcher.value}
+        onClose={createOrUpdateBoardModalSwitcher.off}
+      />
     </div>
   );
 }

@@ -14,6 +14,7 @@ type ButtonProps = {
   variant?: ButtonVariant;
   onClick?: () => void;
   className?: string;
+  isLoading?: boolean;
 };
 
 const buttonStyles: Record<ButtonVariant, string> = {
@@ -29,16 +30,41 @@ export const Button: React.FC<ButtonProps> = ({
   variant = ButtonVariant.PRIMARY,
   onClick,
   className = '',
+  isLoading = false,
 }) => {
   return (
     <button
       className={clsx(
-        `px-4 py-2 rounded-md transition ${buttonStyles[variant]}`,
+        'px-4 py-2 rounded-md transition flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed',
+        buttonStyles[variant],
         className
       )}
-      onClick={onClick}
+      disabled={isLoading}
+      onClick={!isLoading ? onClick : undefined}
     >
-      {children}
+      {isLoading && (
+        <svg
+          className="animate-spin h-5 w-5 mr-2 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            d="M4 12a8 8 0 018-8v4l3-3m-3 3l-3-3"
+            fill="currentColor"
+          />
+        </svg>
+      )}
+      <span>{children}</span>
     </button>
   );
 };
