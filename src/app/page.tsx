@@ -5,16 +5,12 @@ import React from 'react';
 import { BoardCard } from '@/components/boards';
 import { Button, EmptyState, LoaderContainer } from '@/components/shared';
 import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
-import { useMountEffect, useToggle } from '@/hooks';
-import { useBoardStore } from '@/store/useBoardStore';
+import { useBoards, useToggle } from '@/hooks';
 
 export default function HomePage() {
-  const { boards, fetchBoards, isLoadingBoards } = useBoardStore();
-  const createOrUpdateBoardModalSwitcher = useToggle(false);
+  const { data: boards, isLoading: isLoadingBoards } = useBoards();
 
-  useMountEffect(() => {
-    fetchBoards();
-  });
+  const createOrUpdateBoardModalSwitcher = useToggle(false);
 
   return (
     <div className="flex flex-col h-full p-6">
@@ -31,15 +27,13 @@ export default function HomePage() {
             <EmptyState message="No boards here yet" />
           </div>
         }
-        isEmpty={!boards.length}
+        isEmpty={!boards?.length}
         isLoading={isLoadingBoards}
         loaderClassName="flex flex-center h-full"
         loaderSize={50}
       >
         <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {boards.map(board => (
-            <BoardCard key={board.id} board={board} />
-          ))}
+          {boards?.map(board => <BoardCard key={board.id} board={board} />)}
         </div>
       </LoaderContainer>
       <CreateOrUpdateBoardModal

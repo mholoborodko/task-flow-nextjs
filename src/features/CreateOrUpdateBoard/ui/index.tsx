@@ -15,8 +15,8 @@ export const CreateOrUpdateBoardModal: FC<CreateOrUpdateBoardModalProps> = ({
   onClose,
   boardId,
 }) => {
-  const { form, handleSubmit } = useBoard({
-    boardId,
+  const { form, handleSubmit, isLoading } = useBoard({
+    boardId: boardId || '',
     closeModal: onClose,
   });
 
@@ -36,7 +36,7 @@ export const CreateOrUpdateBoardModal: FC<CreateOrUpdateBoardModalProps> = ({
       <div className="flex justify-end mt-4">
         <Button
           className="ml-2"
-          isLoading={form.formState.isSubmitting}
+          isLoading={isLoading}
           label={!boardId ? 'Create' : 'Save changes'}
           onClick={handleSubmit}
         />

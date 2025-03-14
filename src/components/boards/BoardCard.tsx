@@ -4,7 +4,7 @@ import { Dropdown, DropdownOption } from '@/components/shared/Dropdown';
 import { Board } from '@/entities/Board';
 import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
 import { useToggle } from '@/hooks';
-import { useBoardStore } from '@/store/useBoardStore';
+import { useRemoveBoard } from '@/hooks/useDeleteBoard';
 
 import { ConfirmActionModal, Icon } from '../shared';
 
@@ -17,7 +17,7 @@ export const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
   const createOrUpdateBoardModalSwitcher = useToggle(false);
   const deleteBoardModalSwitcher = useToggle(false);
 
-  const { removeBoard } = useBoardStore();
+  const { mutate: removeBoard } = useRemoveBoard();
 
   const options: DropdownOption[] = [
     {
