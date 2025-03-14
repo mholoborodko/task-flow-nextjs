@@ -15,14 +15,15 @@ export type BoardFormData = z.infer<typeof formSchema>;
 
 interface UseBoardProps {
   closeModal: () => void;
+  boardId: string | undefined;
 }
 
 const defaultValues: BoardFormData = {
   title: '',
 };
 
-export function useBoard({ closeModal }: UseBoardProps) {
-  const { addBoard } = useBoardStore();
+export function useBoard({ closeModal, boardId }: UseBoardProps) {
+  const { addBoard, updateBoard } = useBoardStore();
 
   const form = useForm<BoardFormData>({
     defaultValues,
@@ -30,11 +31,14 @@ export function useBoard({ closeModal }: UseBoardProps) {
   });
 
   const handleSubmit = async (values: BoardFormData) => {
-    await addBoard(values.title);
+    if (boardId) {
+      await updateBoard(boardId, { title: values.title });
+      toast.success('Board updated successfully');
+    } else {
+      await addBoard(values.title);
+      toast.success('New board created successfully');
+    }
     closeModal();
-    toast.success('New board created successfully');
-    //TODO add during update
-    // Board updated successfully
   };
 
   return { form, handleSubmit: form.handleSubmit(handleSubmit) };

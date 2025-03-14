@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "prepare": "husky install",
-    "commit": "cz"
+    "commit": "cz",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.5",
@@ -35,6 +36,7 @@
     "@commitlint/config-conventional": "^19.7.1",
     "@next/eslint-plugin-next": "^15.2.1",
     "@types/react": "19.0.10",
+    "@types/react-modal": "^3.16.3",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
     "autoprefixer": "^10.4.20",

@@ -53,6 +53,7 @@ export const Modal: React.FC<ModalProps> = ({
       )}
       isOpen={isOpen}
       overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      onAfterClose={onAfterClose}
       onRequestClose={onClose}
     >
       <h2 className="text-lg font-semibold mb-3">{title}</h2>

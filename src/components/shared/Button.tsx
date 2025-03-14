@@ -10,7 +10,7 @@ export enum ButtonVariant {
 }
 
 type ButtonProps = {
-  children: React.ReactNode;
+  label: string;
   variant?: ButtonVariant;
   onClick?: () => void;
   className?: string;
@@ -26,7 +26,7 @@ const buttonStyles: Record<ButtonVariant, string> = {
 };
 
 export const Button: React.FC<ButtonProps> = ({
-  children,
+  label,
   variant = ButtonVariant.PRIMARY,
   onClick,
   className = '',
@@ -64,7 +64,7 @@ export const Button: React.FC<ButtonProps> = ({
           />
         </svg>
       )}
-      <span>{children}</span>
+      <span>{label}</span>
     </button>
   );
 };

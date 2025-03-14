@@ -2,8 +2,11 @@ import { useRouter } from 'next/navigation';
 
 import { Dropdown, DropdownOption } from '@/components/shared/Dropdown';
 import { Board } from '@/entities/Board';
+import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
+import { useToggle } from '@/hooks';
+import { useBoardStore } from '@/store/useBoardStore';
 
-import { Icon } from '../shared';
+import { ConfirmActionModal, Icon } from '../shared';
 
 interface BoardCardProps {
   board: Board;
@@ -11,14 +14,20 @@ interface BoardCardProps {
 
 export const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
   const router = useRouter();
+  const createOrUpdateBoardModalSwitcher = useToggle(false);
+  const deleteBoardModalSwitcher = useToggle(false);
+
+  const { removeBoard } = useBoardStore();
 
   const options: DropdownOption[] = [
     {
       label: 'Edit',
+      onSelect: createOrUpdateBoardModalSwitcher.on,
     },
     {
       label: 'Delete',
       className: 'text-red-500',
+      onSelect: deleteBoardModalSwitcher.on,
     },
   ];
 
@@ -37,6 +46,18 @@ export const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
           </button>
         )}
       </Dropdown>
+      <CreateOrUpdateBoardModal
+        boardId={board.id}
+        isOpen={createOrUpdateBoardModalSwitcher.value}
+        onClose={createOrUpdateBoardModalSwitcher.off}
+      />
+      <ConfirmActionModal
+        actionMessage="Are you sure you want to delete this board?"
+        isOpen={deleteBoardModalSwitcher.value}
+        title="Delete board"
+        onClose={deleteBoardModalSwitcher.off}
+        onConfirm={() => removeBoard(board.id)}
+      />
     </div>
   );
 };

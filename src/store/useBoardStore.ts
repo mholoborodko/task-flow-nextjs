@@ -7,7 +7,7 @@ import { supabase } from '@/utils/supabaseClient';
 export type BoardStore = {
   boards: Board[];
   boardById: Board | null;
-  isLoading: boolean;
+  isLoadingBoards: boolean;
   fetchBoards: () => Promise<void>;
   fetchBoardById: (id: string) => Promise<void>;
   addBoard: (title: string) => Promise<void>;
@@ -18,10 +18,10 @@ export type BoardStore = {
 export const useBoardStore = create<BoardStore>(set => ({
   boards: [],
   boardById: null,
-  isLoading: true,
-
+  isLoadingBoards: true,
+  isDeletingBoard: false,
   fetchBoards: async () => {
-    set({ isLoading: true });
+    set({ isLoadingBoards: true });
 
     const { data, error } = await supabase
       .from('boards')
@@ -34,11 +34,9 @@ export const useBoardStore = create<BoardStore>(set => ({
       set({ boards: data || [] });
     }
 
-    set({ isLoading: false });
+    set({ isLoadingBoards: false });
   },
   fetchBoardById: async id => {
-    set({ isLoading: true });
-
     const { data, error } = await supabase
       .from('boards')
       .select('*')
@@ -51,13 +49,9 @@ export const useBoardStore = create<BoardStore>(set => ({
     } else {
       set({ boardById: data });
     }
-
-    set({ isLoading: false });
   },
 
   addBoard: async title => {
-    set({ isLoading: true });
-
     const { data, error } = await supabase
       .from('boards')
       .insert([{ title }])
@@ -69,13 +63,9 @@ export const useBoardStore = create<BoardStore>(set => ({
     } else {
       set(state => ({ boards: [...state.boards, data] }));
     }
-
-    set({ isLoading: false });
   },
 
   removeBoard: async id => {
-    set({ isLoading: true });
-
     const { error } = await supabase.from('boards').delete().eq('id', id);
 
     if (error) {
@@ -83,13 +73,10 @@ export const useBoardStore = create<BoardStore>(set => ({
     } else {
       set(state => ({ boards: state.boards.filter(board => board.id !== id) }));
     }
-
-    set({ isLoading: false });
+    toast.success('Board deleted successfully');
   },
 
   updateBoard: async (id, updatedBoard) => {
-    set({ isLoading: true });
-
     const { error } = await supabase
       .from('boards')
       .update(updatedBoard)
@@ -104,7 +91,5 @@ export const useBoardStore = create<BoardStore>(set => ({
         ),
       }));
     }
-
-    set({ isLoading: false });
   },
 }));

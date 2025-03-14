@@ -8,3 +8,5 @@ export { TaskCard } from './TaskCard';
 export { TaskList } from './TaskList';
 export { Loader } from './Loader';
 export { Dropdown } from './Dropdown';
+export { LoaderContainer } from './LoaderContainer';
+export { ConfirmActionModal } from './ConfirmActionModal';

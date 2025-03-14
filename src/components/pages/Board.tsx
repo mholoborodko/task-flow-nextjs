@@ -2,7 +2,8 @@
 
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 
-import { TaskStatus, useTaskStore } from '@/store/taskStore';
+import { TaskStatus } from '@/entities/Task';
+import { useTaskStore } from '@/store/taskStore';
 
 import { TaskList } from '../shared';
 

@@ -50,6 +50,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
     };
   }, []);
 
+  const closeDropdown = () => setIsOpen(false);
+
   return (
     <div ref={dropdownRef} className="relative inline-block">
       <div ref={refs.setReference} onClick={() => setIsOpen(prev => !prev)}>
@@ -66,9 +68,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
             <DropdownItem
               key={index}
               className={className}
+              closeDropdown={closeDropdown}
               label={label}
               subOptions={subOptions}
-              onSelect={onSelect}
+              onSelect={() => {
+                if (onSelect) onSelect();
+                closeDropdown();
+              }}
             />
           ))}
         </div>
@@ -77,12 +83,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
   );
 };
 
-const DropdownItem: React.FC<DropdownOption> = ({
-  label,
-  onSelect,
-  className,
-  subOptions,
-}) => {
+const DropdownItem: React.FC<
+  DropdownOption & { onSelect: () => void; closeDropdown: () => void }
+> = ({ label, onSelect, className, subOptions, closeDropdown }) => {
   const [isSubOpen, setIsSubOpen] = useState(false);
   const itemRef = useRef<HTMLDivElement>(null);
   const { refs, floatingStyles } = useFloating({
@@ -100,17 +103,13 @@ const DropdownItem: React.FC<DropdownOption> = ({
       )}
       onClick={e => {
         e.stopPropagation();
-        if (onSelect) {
-          onSelect();
-        }
-        if (subOptions) {
-          setIsSubOpen(prev => !prev);
-        }
+        onSelect();
+        closeDropdown();
       }}
       onMouseEnter={() => subOptions && setIsSubOpen(true)}
       onMouseLeave={() => subOptions && setIsSubOpen(false)}
     >
-      <span>{label}</span>
+      <span className="font-semibold">{label}</span>
       {subOptions && <span className="ml-2 text-xs">{'▶'}</span>}
       {subOptions && isSubOpen && (
         <div
@@ -119,7 +118,12 @@ const DropdownItem: React.FC<DropdownOption> = ({
           style={floatingStyles}
         >
           {subOptions.map((subOption, index) => (
-            <DropdownItem key={index} {...subOption} />
+            <DropdownItem
+              key={index}
+              {...subOption}
+              closeDropdown={closeDropdown}
+              onSelect={subOption.onSelect || (() => {})}
+            />
           ))}
         </div>
       )}
