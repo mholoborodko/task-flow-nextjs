@@ -6,11 +6,12 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
 
+import { FORM_ERRORS } from '@/constants';
 import { useAddBoard, useUpdateBoard } from '@/hooks';
-import { useBoardById } from '@/hooks/useBoardById';
+import { useBoardById } from '@/hooks/queries/useBoardById';
 
 export const formSchema = z.object({
-  title: z.string().trim().min(1, 'Required'),
+  title: z.string().trim().min(1, FORM_ERRORS.required),
 });
 
 export type BoardFormData = z.infer<typeof formSchema>;

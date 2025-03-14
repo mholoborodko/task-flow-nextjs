@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchBoards } from '@/api/boards';
-import { QueryKeys } from '@/utils/queryKeys';
+import { QueryKeys } from '@/constants';
 
 export const useBoards = () => {
   return useQuery({

@@ -4,7 +4,7 @@ import { Dropdown, DropdownOption } from '@/components/shared/Dropdown';
 import { Board } from '@/entities/Board';
 import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
 import { useToggle } from '@/hooks';
-import { useRemoveBoard } from '@/hooks/useDeleteBoard';
+import { useRemoveBoard } from '@/hooks/queries/useDeleteBoard';
 
 import { ConfirmActionModal, Icon } from '../shared';
 

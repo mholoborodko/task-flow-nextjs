@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchBoardById } from '@/api/boards';
-import { QueryKeys } from '@/utils/queryKeys';
+import { QueryKeys } from '@/constants';
 
 export function useBoardById(boardId: string) {
   return useQuery({

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
 import { removeBoard } from '@/api/boards';
-import { QueryKeys } from '@/utils/queryKeys';
+import { QueryKeys } from '@/constants';
 
 export function useRemoveBoard() {
   const queryClient = useQueryClient();

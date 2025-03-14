@@ -1,5 +1,5 @@
 export { useToggle } from './useToggle';
 export { useMountEffect } from './useMountEffect';
-export { useBoards } from './useBoards';
-export { useAddBoard } from './useAddBoard';
-export { useUpdateBoard } from './useUpdateBoard';
+export { useBoards } from './queries/useBoards';
+export { useAddBoard } from './queries/useAddBoard';
+export { useUpdateBoard } from './queries/useUpdateBoard';
