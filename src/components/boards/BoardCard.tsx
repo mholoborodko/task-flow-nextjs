@@ -2,9 +2,9 @@ import { useRouter } from 'next/navigation';
 
 import { Dropdown, DropdownOption } from '@/components/shared/Dropdown';
 import { Board } from '@/entities/Board';
+import { useRemoveBoard } from '@/entities/Board/hooks/useDeleteBoard';
 import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
 import { useToggle } from '@/hooks';
-import { useRemoveBoard } from '@/hooks/queries/useDeleteBoard';
 
 import { ConfirmActionModal, Icon } from '../shared';
 

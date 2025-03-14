@@ -7,8 +7,7 @@ import toast from 'react-hot-toast';
 import { z } from 'zod';
 
 import { FORM_ERRORS } from '@/constants';
-import { useAddBoard, useUpdateBoard } from '@/hooks';
-import { useBoardById } from '@/hooks/queries/useBoardById';
+import { useAddBoard, useBoardById, useUpdateBoard } from '@/entities/Board';
 
 export const formSchema = z.object({
   title: z.string().trim().min(1, FORM_ERRORS.required),

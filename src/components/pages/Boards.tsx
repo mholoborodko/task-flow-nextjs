@@ -4,8 +4,9 @@ import React from 'react';
 
 import { BoardCard } from '@/components/boards';
 import { Button, EmptyState, LoaderContainer } from '@/components/shared';
+import { useBoards } from '@/entities/Board';
 import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
-import { useBoards, useToggle } from '@/hooks';
+import { useToggle } from '@/hooks';
 
 export const Boards = () => {
   const { data: boards, isLoading: isLoadingBoards } = useBoards();
