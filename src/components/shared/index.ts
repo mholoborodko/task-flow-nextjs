@@ -10,3 +10,5 @@ export { Loader } from './Loader';
 export { Dropdown } from './Dropdown';
 export { LoaderContainer } from './LoaderContainer';
 export { ConfirmActionModal } from './ConfirmActionModal';
+export { TextAreaField } from './TextAreaField';
+export { ExpandableDescription } from './ExpandableDescription';

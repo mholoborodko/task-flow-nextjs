@@ -3,13 +3,15 @@ import { toast } from 'react-hot-toast';
 
 import { addBoard } from '@/api/boards';
 import { QueryKeys } from '@/constants';
-import { Board } from '@/entities/Board';
+import { AddBoardRequest, Board } from '@/entities/Board';
 
 export const useAddBoard = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: addBoard,
+    mutationFn: ({ title, description }: AddBoardRequest) =>
+      addBoard(title, description),
+
     onSuccess: newBoard => {
       queryClient.setQueryData(
         [QueryKeys.BOARDS],
@@ -17,6 +19,7 @@ export const useAddBoard = () => {
       );
       queryClient.invalidateQueries({ queryKey: [QueryKeys.BOARD] });
     },
+
     onError: (error: any) => {
       toast.error(error.message || 'Failed to add board');
     },

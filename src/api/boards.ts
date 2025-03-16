@@ -27,10 +27,10 @@ export const fetchBoardById = async (id: string) => {
   return data;
 };
 
-export const addBoard = async (title: string) => {
+export const addBoard = async (title: string, description: string) => {
   const { data, error } = await supabase
     .from('boards')
-    .insert([{ title }])
+    .insert([{ title, description }])
     .select()
     .single();
 
@@ -43,7 +43,7 @@ export const addBoard = async (title: string) => {
 
 export const updateBoard = async (
   id: string,
-  updatedBoard: { title: string }
+  updatedBoard: { title: string; description: string }
 ) => {
   const { error } = await supabase
     .from('boards')
@@ -54,7 +54,6 @@ export const updateBoard = async (
     throw new Error(error.message);
   }
 };
-
 export const removeBoard = async (id: string) => {
   const { error } = await supabase.from('boards').delete().eq('id', id);
 

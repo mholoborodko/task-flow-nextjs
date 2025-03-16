@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Button, Modal, TextInput } from '@/components/shared';
+import { Button, Modal, TextAreaField, TextInput } from '@/components/shared';
 import { ModalProps } from '@/components/shared/Modal';
 
 import { useBoard } from '../hooks/useBoardForm';
@@ -22,24 +22,27 @@ export const CreateOrUpdateBoardModal: FC<CreateOrUpdateBoardModalProps> = ({
 
   return (
     <Modal
+      className="w-[500px]"
       isOpen={isOpen}
       title={!boardId ? 'Create new board' : 'Edit board'}
       onAfterClose={form.reset}
       onClose={onClose}
     >
-      <TextInput
-        control={form.control}
-        label="Name"
-        name="title"
-        placeholder="Board name"
-      />
-      <div className="flex justify-end mt-4">
-        <Button
-          className="ml-2"
-          isLoading={isLoading}
-          label={!boardId ? 'Create' : 'Save changes'}
-          onClick={handleSubmit}
+      <div className="flex flex-col gap-2">
+        <TextInput control={form.control} label="Name" name="title" />
+        <TextAreaField
+          control={form.control}
+          label="Description"
+          maxLength={500}
+          name="description"
         />
+        <div className="flex justify-end mt-8">
+          <Button
+            isLoading={isLoading}
+            label={!boardId ? 'Create' : 'Save changes'}
+            onClick={handleSubmit}
+          />
+        </div>
       </div>
     </Modal>
   );

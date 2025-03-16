@@ -2,9 +2,8 @@
 
 import React from 'react';
 
-import { BoardCard } from '@/components/boards';
 import { Button, EmptyState, LoaderContainer } from '@/components/shared';
-import { useBoards } from '@/entities/Board';
+import { BoardCard, useBoards } from '@/entities/Board';
 import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
 import { useToggle } from '@/hooks';
 

@@ -11,6 +11,7 @@ import { useAddBoard, useBoardById, useUpdateBoard } from '@/entities/Board';
 
 export const formSchema = z.object({
   title: z.string().trim().min(1, FORM_ERRORS.required),
+  description: z.string(),
 });
 
 export type BoardFormData = z.infer<typeof formSchema>;
@@ -22,6 +23,7 @@ interface UseBoardProps {
 
 export const defaultValues: BoardFormData = {
   title: '',
+  description: '',
 };
 
 export function useBoard({ closeModal, boardId }: UseBoardProps) {
@@ -37,14 +39,14 @@ export function useBoard({ closeModal, boardId }: UseBoardProps) {
 
   useEffect(() => {
     if (board) {
-      form.reset({ title: board.title });
+      form.reset({ title: board.title, description: board.description });
     }
   }, [board, form]);
 
   const handleSubmit = form.handleSubmit(values => {
     if (boardId) {
       updateBoard(
-        { boardId, title: values.title },
+        { boardId, ...values },
         {
           onSuccess: () => {
             toast.success('Board updated successfully');
@@ -53,12 +55,15 @@ export function useBoard({ closeModal, boardId }: UseBoardProps) {
         }
       );
     } else {
-      addBoard(values.title, {
-        onSuccess: () => {
-          toast.success('New board created successfully');
-          closeModal();
-        },
-      });
+      addBoard(
+        { ...values },
+        {
+          onSuccess: () => {
+            toast.success('New board created successfully');
+            closeModal();
+          },
+        }
+      );
     }
   });
 
