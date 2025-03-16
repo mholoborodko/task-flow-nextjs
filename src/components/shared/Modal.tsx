@@ -11,6 +11,7 @@ export interface ModalProps {
   className?: string;
   isOpen: boolean;
   onClose: () => void;
+  onAfterClose?: () => void;
   children: React.ReactNode;
 }
 
@@ -19,6 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
   className,
   isOpen,
   onClose,
+  onAfterClose,
   children,
 }) => {
   const [isClient, setIsClient] = useState(false);
@@ -31,6 +33,12 @@ export const Modal: React.FC<ModalProps> = ({
       ReactModal.setAppElement(appElement);
     }
   }, []);
+
+  useEffect(() => {
+    if (!isOpen && onAfterClose) {
+      onAfterClose();
+    }
+  }, [isOpen, onAfterClose]);
 
   if (!isClient) return null;
 
@@ -45,6 +53,7 @@ export const Modal: React.FC<ModalProps> = ({
       )}
       isOpen={isOpen}
       overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      onAfterClose={onAfterClose}
       onRequestClose={onClose}
     >
       <h2 className="text-lg font-semibold mb-3">{title}</h2>
@@ -52,7 +61,7 @@ export const Modal: React.FC<ModalProps> = ({
         className="absolute top-1 right-2 p-1 rounded-full hover:opacity-80"
         onClick={onClose}
       >
-        <Icon name="close" size={24} />
+        <Icon name="close" size={20} />
       </button>
 
       {children}

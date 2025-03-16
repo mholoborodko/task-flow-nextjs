@@ -6,32 +6,38 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "prepare": "husky install && husky add .husky/pre-commit 'npx lint-staged' && husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'",
-    "commit": "cz"
+    "prepare": "husky install",
+    "commit": "cz",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.5",
     "@hello-pangea/dnd": "^18.0.1",
+    "@hookform/resolvers": "^4.1.3",
+    "@supabase/supabase-js": "^2.49.1",
+    "@tanstack/react-query": "^5.68.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.5.0",
     "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "react-hot-toast": "^2.5.2",
     "react-modal": "^3.16.3",
     "sass": "^1.85.1",
+    "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.26.8",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
-    "@eslint/eslintrc": "^3",
     "@next/eslint-plugin-next": "^15.2.1",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "19.0.10",
     "@types/react-modal": "^3.16.3",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
@@ -59,6 +65,8 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,md,css,scss,yaml}": "prettier --write"
+    "*.{json,md,css,scss,yaml}": [
+      "prettier --write"
+    ]
   }
 }

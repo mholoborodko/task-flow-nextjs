@@ -1,4 +1,4 @@
-import { Task } from '@/store/taskStore';
+import { Task } from '@/entities/Task';
 
 import { Button, ButtonVariant } from './Button';
 
@@ -14,11 +14,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
       <p className="text-gray-600 dark:text-gray-300">{task.description}</p>
       <Button
         className="mt-2"
+        label="Delete"
         variant={ButtonVariant.DANGER}
         onClick={() => onDelete(task.id)}
-      >
-        Delete
-      </Button>
+      />
     </div>
   );
 };
