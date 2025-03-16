@@ -9,29 +9,26 @@ interface DescriptionProps {
 }
 
 export const ExpandableDescription: React.FC<DescriptionProps> = ({ text }) => {
-  const expandedSwitcher = useToggle(false);
+  const isExpanded = useToggle(false);
 
   return (
     <div
       className="p-2 md:p-3 rounded-lg bg-gray-100 border border-gray-300 cursor-pointer transition hover:bg-gray-200"
-      onClick={expandedSwitcher.toggle}
+      onClick={isExpanded.toggle}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Icon className="text-gray-500" name="clipboard-text" size={18} />
-          <span className="font-semibold text-gray-700">Description</span>
-        </div>
+        <span className="font-semibold text-gray-700">Description</span>
         <Icon
           className={clsx(
             'text-gray-500 transition-transform duration-200',
-            expandedSwitcher.value && 'rotate-180'
+            isExpanded.value && 'rotate-180'
           )}
           name="chevron-down"
           size={20}
         />
       </div>
       <AnimatePresence>
-        {expandedSwitcher.value && (
+        {isExpanded.value && (
           <motion.div
             animate={{ opacity: 1, height: 'auto' }}
             className="mt-2 p-2 rounded-lg bg-white shadow-sm"
