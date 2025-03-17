@@ -3,8 +3,6 @@ export type AddBoardRequest = {
   description: string;
 };
 
-export type UpdateBoardRequest = {
+export interface UpdateBoardRequest extends AddBoardRequest {
   boardId: string;
-  title: string;
-  description: string;
-};
+}
