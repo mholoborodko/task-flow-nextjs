@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { updateTask } from '@/api/tasks'; // Предположим, у тебя есть API для обновления задачи
+import { updateTask } from '@/api/tasks';
 import { QueryKeys } from '@/constants';
 
 import { Task } from '../model';
@@ -16,25 +16,32 @@ export const useUpdateTask = () => {
       title,
       description,
       status,
-      due_date,
+      dueDate,
       priority,
-      board_id,
+      boardId,
     }: UpdateTaskRequest) =>
-      updateTask(id, title, description, status, due_date, priority, board_id),
+      updateTask(id, title, description, status, dueDate, priority, boardId),
 
     onSuccess: updatedTask => {
-      queryClient.setQueryData([QueryKeys.TASKS], (oldTasks: Task[] = []) =>
-        oldTasks.map(task => (task.id === updatedTask.id ? updatedTask : task))
+      queryClient.setQueryData(
+        [QueryKeys.TASKS, updatedTask.boardId],
+        (oldTasks: Task[] = []) =>
+          oldTasks.map(task =>
+            task.id === updatedTask.id ? updatedTask : task
+          )
       );
 
       queryClient.invalidateQueries({
-        queryKey: [QueryKeys.BOARD, updatedTask.board_id],
+        queryKey: [QueryKeys.BOARD, updatedTask.boardId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.TASKS, updatedTask.boardId],
       });
 
       toast.success('Task updated successfully!');
     },
 
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(error.message || 'Failed to update task');
     },
   });

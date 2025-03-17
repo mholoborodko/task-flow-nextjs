@@ -9,17 +9,21 @@ import {
   useBoardById,
 } from '@/entities/Board';
 import { TaskStatus, useTasks } from '@/entities/Task';
+import { CreateOrUpdateTaskModal } from '@/features';
+import { useToggle } from '@/hooks';
 import { useTaskStore } from '@/store/taskStore';
 
 import { Button, EmptyState, Icon, LoaderContainer, TaskList } from '../shared';
 import { ButtonVariant } from '../shared/Button';
 
 export const Board = () => {
-  const { id }: { id: string } = useParams();
+  const { id: boardId }: { id: string } = useParams();
   const router = useRouter();
 
-  const { data: board, isLoading: isLoadingBoard } = useBoardById(id);
-  const { data: tasks, isLoading: isLoadingTasks } = useTasks(id);
+  const createOrUpdateTaskModalSwitcher = useToggle(false);
+
+  const { data: board, isLoading: isLoadingBoard } = useBoardById(boardId);
+  const { data: tasks, isLoading: isLoadingTasks } = useTasks(boardId);
 
   const { moveTask } = useTaskStore();
 
@@ -64,7 +68,11 @@ export const Board = () => {
             </h1>
           </div>
         </LoaderContainer>
-        <Button disabled={isLoadingBoard} label="Add task" />
+        <Button
+          disabled={isLoadingBoard}
+          label="Add task"
+          onClick={createOrUpdateTaskModalSwitcher.on}
+        />
       </div>
       <LoaderContainer
         customLoader={<BoardSkeleton />}
@@ -88,6 +96,11 @@ export const Board = () => {
           </div>
         </DragDropContext>
       </LoaderContainer>
+      <CreateOrUpdateTaskModal
+        boardId={boardId}
+        isOpen={createOrUpdateTaskModalSwitcher.value}
+        onClose={createOrUpdateTaskModalSwitcher.off}
+      />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Button, EmptyState, LoaderContainer } from '@/components/shared';
 import { BoardCard, BoardListSkeleton, useBoards } from '@/entities/Board';
-import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
+import { CreateOrUpdateBoardModal } from '@/features';
 import { useToggle } from '@/hooks';
 
 export const Boards = () => {

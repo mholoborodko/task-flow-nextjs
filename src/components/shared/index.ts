@@ -12,3 +12,5 @@ export { LoaderContainer } from './LoaderContainer';
 export { ConfirmActionModal } from './ConfirmActionModal';
 export { TextAreaField } from './TextAreaField';
 export { ExpandableDescription } from './ExpandableDescription';
+export { SelectField } from './SelectField';
+export { DateField } from './DateField';

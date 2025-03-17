@@ -1,7 +1,7 @@
-import { TaskStatus, TaskPriority } from '@/entities/Task';
-import { supabase } from '@/utils';
+import { TaskStatus, TaskPriority, Task } from '@/entities/Task';
+import { convertKeysToCamelCase, supabase } from '@/utils';
 
-export const fetchTasks = async (boardId: string) => {
+export const fetchTasks = async (boardId: string): Promise<Task[]> => {
   const { data, error } = await supabase
     .from('tasks')
     .select('*')
@@ -12,10 +12,10 @@ export const fetchTasks = async (boardId: string) => {
     throw new Error(error.message);
   }
 
-  return data || [];
+  return convertKeysToCamelCase(data) || [];
 };
 
-export const fetchTaskById = async (id: string) => {
+export const fetchTaskById = async (id: string): Promise<Task> => {
   const { data, error } = await supabase
     .from('tasks')
     .select('*')
@@ -26,7 +26,7 @@ export const fetchTaskById = async (id: string) => {
     throw new Error(error.message);
   }
 
-  return data;
+  return convertKeysToCamelCase(data);
 };
 
 export const addTask = async (
@@ -36,7 +36,7 @@ export const addTask = async (
   status: TaskStatus = TaskStatus.TO_DO,
   priority: TaskPriority = TaskPriority.MEDIUM,
   dueDate?: string
-) => {
+): Promise<Task> => {
   const { data, error } = await supabase
     .from('tasks')
     .insert([
@@ -56,7 +56,7 @@ export const addTask = async (
     throw new Error(error.message);
   }
 
-  return data;
+  return convertKeysToCamelCase(data);
 };
 
 export const updateTask = async (
@@ -64,19 +64,19 @@ export const updateTask = async (
   title: string,
   description: string,
   status: TaskStatus,
-  due_date: string,
+  dueDate: string,
   priority: TaskPriority,
-  board_id: string
-) => {
+  boardId: string
+): Promise<Task> => {
   const { data, error } = await supabase
     .from('tasks')
     .update({
       title,
       description,
       status,
-      due_date,
+      due_date: dueDate,
       priority,
-      board_id,
+      board_id: boardId,
     })
     .eq('id', id)
     .select()
@@ -86,10 +86,10 @@ export const updateTask = async (
     throw new Error(error.message);
   }
 
-  return data;
+  return convertKeysToCamelCase(data);
 };
 
-export const removeTask = async (id: string) => {
+export const removeTask = async (id: string): Promise<void> => {
   const { error } = await supabase.from('tasks').delete().eq('id', id);
 
   if (error) {
@@ -102,7 +102,7 @@ export const moveTask = async (
   newStatus: TaskStatus,
   newBoardId: string,
   newOrderIndex: number
-) => {
+): Promise<void> => {
   const { error } = await supabase
     .from('tasks')
     .update({

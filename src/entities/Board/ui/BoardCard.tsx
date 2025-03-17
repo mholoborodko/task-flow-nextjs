@@ -9,7 +9,7 @@ import { Dropdown, DropdownOption } from '@/components/shared/Dropdown';
 import { DateFormat } from '@/constants';
 import { Board } from '@/entities/Board';
 import { useRemoveBoard } from '@/entities/Board/hooks/useDeleteBoard';
-import { CreateOrUpdateBoardModal } from '@/features/CreateOrUpdateBoard';
+import { CreateOrUpdateBoardModal } from '@/features';
 import { useToggle } from '@/hooks';
 import { formatDateString } from '@/utils';
 

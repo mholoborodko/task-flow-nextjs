@@ -15,7 +15,7 @@ export const useDeleteTask = () => {
         queryKey: [QueryKeys.BOARD],
       });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(error.message || 'Failed to delete task');
     },
   });

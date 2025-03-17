@@ -4,9 +4,9 @@ export type AddTaskRequest = {
   title: string;
   description: string;
   status: TaskStatus;
-  due_date: string;
+  dueDate: string;
   priority: TaskPriority;
-  board_id: string;
+  boardId: string;
 };
 
 export interface UpdateTaskRequest extends AddTaskRequest {

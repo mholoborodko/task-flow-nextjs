@@ -15,24 +15,29 @@ export const useAddTask = () => {
       title,
       description,
       status,
-      due_date,
+      dueDate,
       priority,
-      board_id,
+      boardId,
     }: AddTaskRequest) =>
-      addTask(title, description, board_id, status, priority, due_date),
+      addTask(title, description, boardId, status, priority, dueDate),
 
     onSuccess: newTask => {
-      queryClient.setQueryData([QueryKeys.TASKS], (oldTasks: Task[] = []) => [
-        ...oldTasks,
-        newTask,
-      ]);
+      queryClient.setQueryData(
+        [QueryKeys.TASKS, newTask.boardId],
+        (oldTasks: Task[] = []) => {
+          return [...oldTasks, newTask];
+        }
+      );
 
       queryClient.invalidateQueries({
-        queryKey: [QueryKeys.BOARD, newTask.board_id],
+        queryKey: [QueryKeys.TASKS, newTask.boardId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.BOARD, newTask.boardId],
       });
     },
 
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(error.message || 'Failed to add task');
     },
   });

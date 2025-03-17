@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { Button, Modal, TextAreaField, TextInput } from '@/components/shared';
-import { ModalProps } from '@/components/shared/Modal';
+import { Button, TextAreaField, TextInput } from '@/components/shared';
+import { Modal, ModalProps } from '@/components/shared/Modal';
 
-import { useBoard } from '../hooks/useBoardForm';
+import { useBoardForm } from './hooks/useBoardForm';
 
 interface CreateOrUpdateBoardModalProps
   extends Pick<ModalProps, 'isOpen' | 'onClose'> {
@@ -15,7 +15,7 @@ export const CreateOrUpdateBoardModal: FC<CreateOrUpdateBoardModalProps> = ({
   onClose,
   boardId,
 }) => {
-  const { form, handleSubmit, isLoading } = useBoard({
+  const { form, handleSubmit, isLoading } = useBoardForm({
     boardId: boardId || '',
     closeModal: onClose,
   });
