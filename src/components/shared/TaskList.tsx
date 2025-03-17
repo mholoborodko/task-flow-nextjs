@@ -2,6 +2,7 @@ import { Droppable, Draggable } from '@hello-pangea/dnd';
 
 import { Task, TaskStatus } from '@/entities/Task';
 import { useTaskStore } from '@/store/taskStore';
+import { convertEnumToString } from '@/utils';
 
 import { TaskCard } from './TaskCard';
 
@@ -22,7 +23,9 @@ export const TaskList = ({ status, tasks }: TaskListProps) => {
           ref={provided.innerRef}
           className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md min-h-[300px]"
         >
-          <h2 className="text-lg font-semibold mb-2">{status}</h2>
+          <h2 className="text-lg font-semibold mb-2">
+            {convertEnumToString(status)}
+          </h2>
           <div className="flex flex-col gap-3">
             {filteredTasks.map((task, index) => (
               <Draggable key={task.id} draggableId={task.id} index={index}>

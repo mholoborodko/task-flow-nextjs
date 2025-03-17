@@ -1,14 +1,27 @@
 'use client';
 
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
+import { useParams, useRouter } from 'next/navigation';
 
-import { TaskStatus } from '@/entities/Task';
+import {
+  BoardHeaderSkeleton,
+  BoardSkeleton,
+  useBoardById,
+} from '@/entities/Board';
+import { TaskStatus, useTasks } from '@/entities/Task';
 import { useTaskStore } from '@/store/taskStore';
 
-import { TaskList } from '../shared';
+import { Button, EmptyState, Icon, LoaderContainer, TaskList } from '../shared';
+import { ButtonVariant } from '../shared/Button';
 
 export const Board = () => {
-  const { tasks, moveTask } = useTaskStore();
+  const { id }: { id: string } = useParams();
+  const router = useRouter();
+
+  const { data: board, isLoading: isLoadingBoard } = useBoardById(id);
+  const { data: tasks, isLoading: isLoadingTasks } = useTasks(id);
+
+  const { moveTask } = useTaskStore();
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
@@ -32,13 +45,50 @@ export const Board = () => {
   const statuses = [TaskStatus.TO_DO, TaskStatus.IN_PROGRESS, TaskStatus.DONE];
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="grid grid-cols-3 gap-4">
-        {statuses.map(status => (
-          <TaskList key={status} status={status} tasks={tasks} />
-        ))}
+    <div className="flex flex-col h-full p-6">
+      <div className="flex items-center justify-between gap-4">
+        <LoaderContainer
+          customLoader={<BoardHeaderSkeleton />}
+          isLoading={isLoadingBoard}
+        >
+          <div className="flex items-center gap-3">
+            <Button
+              label={
+                <Icon className="text-gray-500" name="back-arrow" size={20} />
+              }
+              variant={ButtonVariant.SECONDARY}
+              onClick={() => router.push('/')}
+            />
+            <h1 className="text-2xl font-bold text-blue-950">
+              {board?.title || ''}
+            </h1>
+          </div>
+        </LoaderContainer>
+        <Button disabled={isLoadingBoard} label="Add task" />
       </div>
-    </DragDropContext>
+      <LoaderContainer
+        customLoader={<BoardSkeleton />}
+        emptyStateComponent={
+          <div className="flex-center h-full">
+            <EmptyState message="No tasks here yet" />
+          </div>
+        }
+        isEmpty={!tasks?.length}
+        isLoading={isLoadingBoard || isLoadingTasks}
+      >
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="mt-8 grid grid-cols-3 gap-4 h-full">
+            {statuses.map(status => (
+              <TaskList
+                key={status}
+                status={status}
+                tasks={tasks?.filter(t => t.status === status) || []}
+              />
+            ))}
+          </div>
+        </DragDropContext>
+      </LoaderContainer>
+    </div>
   );
 };
 

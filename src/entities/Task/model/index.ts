@@ -1,8 +1,11 @@
+import { Board } from '@/entities/Board';
+
 export enum TaskStatus {
   TO_DO = 'TO_DO',
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE',
 }
+
 export enum TaskPriority {
   LOW = 'LOW',
   MEDIUM = 'MEDIUM',
@@ -16,7 +19,7 @@ export interface Task {
   status: TaskStatus;
   due_date?: string;
   priority: TaskPriority;
-  board_id: string;
+  board: Board;
   attachments?: string[];
   order_index: number;
 }
