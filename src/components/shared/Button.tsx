@@ -22,7 +22,7 @@ const buttonStyles: Record<ButtonVariant, string> = {
   [ButtonVariant.PRIMARY]:
     'bg-blue-500 hover:bg-blue-600 text-white disabled:bg-blue-300',
   [ButtonVariant.SECONDARY]:
-    'bg-gray-300 hover:bg-gray-400 text-black disabled:bg-gray-200',
+    'bg-gray-200 hover:bg-gray-300 text-black disabled:bg-gray-200',
   [ButtonVariant.SUCCESS]:
     'bg-green-500 hover:bg-green-600 text-white disabled:bg-green-300',
   [ButtonVariant.WARNING]:

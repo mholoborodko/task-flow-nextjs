@@ -2,8 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchTaskById } from '@/api/tasks';
 import { QueryKeys } from '@/constants';
+import { fetchTaskById } from '@/entities/Task';
 
 export function useTaskById(taskId: string) {
   return useQuery({

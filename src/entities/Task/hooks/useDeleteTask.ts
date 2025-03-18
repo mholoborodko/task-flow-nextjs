@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { removeTask } from '@/api/tasks';
 import { QueryKeys } from '@/constants';
+import { removeTask } from '@/entities/Task';
 
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();

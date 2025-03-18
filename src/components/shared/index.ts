@@ -14,3 +14,4 @@ export { TextAreaField } from './TextAreaField';
 export { ExpandableDescription } from './ExpandableDescription';
 export { SelectField } from './SelectField';
 export { DateField } from './DateField';
+export { Badge } from './Badge';

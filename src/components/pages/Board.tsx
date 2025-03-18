@@ -17,8 +17,8 @@ import { Button, EmptyState, Icon, LoaderContainer, TaskList } from '../shared';
 import { ButtonVariant } from '../shared/Button';
 
 export const Board = () => {
-  const { id: boardId }: { id: string } = useParams();
   const router = useRouter();
+  const { id: boardId }: { id: string } = useParams();
 
   const createOrUpdateTaskModalSwitcher = useToggle(false);
 
@@ -86,11 +86,13 @@ export const Board = () => {
       >
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="mt-8 grid grid-cols-3 gap-4 h-full">
-            {statuses.map(status => (
+            {statuses.map(taskStatus => (
               <TaskList
-                key={status}
-                status={status}
-                tasks={tasks?.filter(t => t.status === status) || []}
+                key={taskStatus}
+                status={taskStatus}
+                tasks={
+                  tasks?.filter(({ status }) => status === taskStatus) || []
+                }
               />
             ))}
           </div>

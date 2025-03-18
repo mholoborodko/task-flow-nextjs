@@ -1,5 +1,14 @@
-import { TaskStatus, TaskPriority, Task } from '@/entities/Task';
-import { convertKeysToCamelCase, supabase } from '@/utils';
+import {
+  TaskStatus,
+  Task,
+  AddTaskRequest,
+  UpdateTaskRequest,
+} from '@/entities/Task';
+import {
+  convertKeysToCamelCase,
+  convertKeysToSnakeCase,
+  supabase,
+} from '@/utils';
 
 export const fetchTasks = async (boardId: string): Promise<Task[]> => {
   const { data, error } = await supabase
@@ -29,26 +38,10 @@ export const fetchTaskById = async (id: string): Promise<Task> => {
   return convertKeysToCamelCase(data);
 };
 
-export const addTask = async (
-  title: string,
-  description: string,
-  boardId: string,
-  status: TaskStatus = TaskStatus.TO_DO,
-  priority: TaskPriority = TaskPriority.MEDIUM,
-  dueDate?: string
-): Promise<Task> => {
+export const addTask = async (task: AddTaskRequest): Promise<Task> => {
   const { data, error } = await supabase
     .from('tasks')
-    .insert([
-      {
-        title,
-        description,
-        board_id: boardId,
-        status,
-        priority,
-        due_date: dueDate,
-      },
-    ])
+    .insert([convertKeysToSnakeCase(task)])
     .select()
     .single();
 
@@ -59,25 +52,12 @@ export const addTask = async (
   return convertKeysToCamelCase(data);
 };
 
-export const updateTask = async (
-  id: string,
-  title: string,
-  description: string,
-  status: TaskStatus,
-  dueDate: string,
-  priority: TaskPriority,
-  boardId: string
-): Promise<Task> => {
+export const updateTask = async (task: UpdateTaskRequest) => {
+  const { id, ...updateFields } = task;
+
   const { data, error } = await supabase
     .from('tasks')
-    .update({
-      title,
-      description,
-      status,
-      due_date: dueDate,
-      priority,
-      board_id: boardId,
-    })
+    .update(convertKeysToSnakeCase(updateFields))
     .eq('id', id)
     .select()
     .single();

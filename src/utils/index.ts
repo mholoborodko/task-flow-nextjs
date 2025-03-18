@@ -3,3 +3,4 @@ export { supabase } from './supabaseClient';
 export { convertEnumToString } from './convertEnumToString';
 export { enumToOptions } from './enumToOptions';
 export { convertKeysToCamelCase } from './convertKeysToCamelCase';
+export { convertKeysToSnakeCase } from './convertKeysToSnakeCase';

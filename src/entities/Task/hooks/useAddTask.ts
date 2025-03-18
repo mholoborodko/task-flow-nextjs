@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { addTask } from '@/api/tasks';
 import { QueryKeys } from '@/constants';
+import { addTask } from '@/entities/Task';
 
 import { Task } from '../model';
 import { AddTaskRequest } from '../types';
@@ -11,15 +11,7 @@ export const useAddTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      title,
-      description,
-      status,
-      dueDate,
-      priority,
-      boardId,
-    }: AddTaskRequest) =>
-      addTask(title, description, boardId, status, priority, dueDate),
+    mutationFn: (task: AddTaskRequest) => addTask(task),
 
     onSuccess: newTask => {
       queryClient.setQueryData(

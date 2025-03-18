@@ -2,8 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchTasks } from '@/api/tasks';
 import { QueryKeys } from '@/constants';
+import { fetchTasks } from '@/entities/Task';
 
 export const useTasks = (boardId: string) => {
   return useQuery({

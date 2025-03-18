@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-import { updateBoard } from '@/api/boards';
 import { QueryKeys } from '@/constants';
-import { Board, UpdateBoardRequest } from '@/entities/Board';
+import { updateBoard, Board, UpdateBoardRequest } from '@/entities/Board';
 
 export function useUpdateBoard() {
   const queryClient = useQueryClient();
