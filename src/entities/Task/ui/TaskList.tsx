@@ -1,10 +1,8 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 
-import { Task, TaskStatus } from '@/entities/Task';
+import { Icon } from '@/components/shared';
+import { Task, TaskCard, TaskStatus } from '@/entities/Task';
 import { convertEnumToString } from '@/utils';
-
-import { Icon } from './Icon';
-import { TaskCard } from './TaskCard';
 
 interface TaskListProps {
   status: TaskStatus;

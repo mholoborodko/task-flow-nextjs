@@ -8,12 +8,12 @@ import {
   BoardSkeleton,
   useBoardById,
 } from '@/entities/Board';
-import { TaskStatus, useTasks } from '@/entities/Task';
+import { TaskList, TaskStatus, useTasks } from '@/entities/Task';
 import { CreateOrUpdateTaskModal } from '@/features';
 import { useToggle } from '@/hooks';
 import { useTaskStore } from '@/store/taskStore';
 
-import { Button, EmptyState, Icon, LoaderContainer, TaskList } from '../shared';
+import { Button, EmptyState, Icon, LoaderContainer } from '../shared';
 import { ButtonVariant } from '../shared/Button';
 
 export const Board = () => {

@@ -80,7 +80,13 @@ export function useTaskForm({ closeModal, taskId, boardId }: UseTaskProps) {
 
   useEffect(() => {
     if (task) {
-      form.reset({ title: task.title, description: task.description });
+      form.reset({
+        title: task.title,
+        description: task.description,
+        status: task.status,
+        priority: task.priority,
+        dueDate: task.dueDate,
+      });
     }
   }, [task, form]);
 

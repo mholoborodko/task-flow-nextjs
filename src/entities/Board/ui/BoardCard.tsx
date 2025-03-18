@@ -54,15 +54,13 @@ export const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
             </button>
           </div>
         </div>
-        <div className="relative dropdown-container">
-          <Dropdown options={options}>
-            {() => (
-              <button className="flex-center p-1.5 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors">
-                <Icon name="more" size={20} />
-              </button>
-            )}
-          </Dropdown>
-        </div>
+        <Dropdown options={options}>
+          {() => (
+            <button className="flex-center p-1.5 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors">
+              <Icon name="more" size={20} />
+            </button>
+          )}
+        </Dropdown>
       </div>
       <div className="flex items-center gap-2 text-gray-500 text-sm bg-gray-100 px-2 py-1 rounded-md w-fit">
         <Icon className="text-gray-500" name="calendar" size={16} />

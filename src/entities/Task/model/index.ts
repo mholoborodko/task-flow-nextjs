@@ -18,4 +18,5 @@ export interface Task {
   priority: TaskPriority;
   boardId: string;
   attachments?: string[];
+  createdAt?: string;
 }
