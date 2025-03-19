@@ -53,6 +53,8 @@ export const TaskList: React.FC<TaskListProps> = React.memo(
                 <p className="text-gray-500 text-sm italic">No tasks yet</p>
               )}
             </div>
+
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
