@@ -26,7 +26,7 @@ export const defaultValues: BoardFormData = {
   description: '',
 };
 
-export function useBoard({ closeModal, boardId }: UseBoardProps) {
+export function useBoardForm({ closeModal, boardId }: UseBoardProps) {
   const { data: board } = useBoardById(boardId);
 
   const { mutate: addBoard, isPending: isAdding } = useAddBoard();

@@ -3,10 +3,22 @@ export enum TaskStatus {
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE',
 }
+export enum TaskPriority {
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+}
 
-export type Task = {
+export interface Task {
   id: string;
   title: string;
   description?: string;
   status: TaskStatus;
-};
+  dueDate?: string;
+  priority: TaskPriority;
+  boardId: string;
+  attachments?: string[];
+  createdAt?: string;
+  updatedAt?: string;
+  orderIndex: number;
+}

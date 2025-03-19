@@ -47,6 +47,7 @@ export default [
       semi: ['error', 'always'],
       quotes: ['error', 'single'],
       'no-console': 'error',
+      '@typescript-eslint/no-explicit-any': 'error', // Запрещает использование `any`
       'import/order': [
         'error',
         {

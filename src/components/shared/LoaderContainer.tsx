@@ -8,6 +8,7 @@ interface LoaderContainerProps {
   loaderSize?: number;
   isEmpty?: boolean;
   emptyStateComponent?: ReactNode;
+  customLoader?: ReactNode;
 }
 
 export const LoaderContainer: FC<PropsWithChildren<LoaderContainerProps>> = ({
@@ -16,12 +17,13 @@ export const LoaderContainer: FC<PropsWithChildren<LoaderContainerProps>> = ({
   loaderSize,
   isEmpty,
   emptyStateComponent,
+  customLoader,
   children,
 }) => {
   if (isLoading) {
     return (
       <div className={loaderClassName}>
-        <Loader size={loaderSize} />
+        {customLoader || <Loader size={loaderSize} />}
       </div>
     );
   }

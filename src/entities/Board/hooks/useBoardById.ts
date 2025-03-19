@@ -2,8 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchBoardById } from '@/api/boards';
 import { QueryKeys } from '@/constants';
+import { fetchBoardById } from '@/entities/Board';
 
 export function useBoardById(boardId: string) {
   return useQuery({

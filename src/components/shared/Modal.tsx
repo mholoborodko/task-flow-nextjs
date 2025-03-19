@@ -1,10 +1,11 @@
 'use client';
 
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ReactModal from 'react-modal';
 
 import { Icon } from '@/components/shared/Icon';
+import { useToggle } from '@/hooks';
 
 export interface ModalProps {
   title: string;
@@ -23,16 +24,16 @@ export const Modal: React.FC<ModalProps> = ({
   onAfterClose,
   children,
 }) => {
-  const [isClient, setIsClient] = useState(false);
+  const isClient = useToggle(false);
 
   useEffect(() => {
-    setIsClient(true);
+    isClient.set(true);
 
     const appElement = document.getElementById('__next');
     if (appElement) {
       ReactModal.setAppElement(appElement);
     }
-  }, []);
+  }, [isClient]);
 
   useEffect(() => {
     if (!isOpen && onAfterClose) {
@@ -40,7 +41,7 @@ export const Modal: React.FC<ModalProps> = ({
     }
   }, [isOpen, onAfterClose]);
 
-  if (!isClient) return null;
+  if (!isClient.value) return null;
 
   return (
     <ReactModal
@@ -56,7 +57,7 @@ export const Modal: React.FC<ModalProps> = ({
       onAfterClose={onAfterClose}
       onRequestClose={onClose}
     >
-      <h2 className="text-lg font-semibold mb-3">{title}</h2>
+      <h2 className="text-2xl font-semibold mb-3">{title}</h2>
       <button
         className="absolute top-1 right-2 p-1 rounded-full hover:opacity-80"
         onClick={onClose}

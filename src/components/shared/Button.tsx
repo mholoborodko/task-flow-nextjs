@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 export enum ButtonVariant {
   PRIMARY = 'PRIMARY',
@@ -10,19 +10,25 @@ export enum ButtonVariant {
 }
 
 type ButtonProps = {
-  label: string;
+  label: ReactNode;
   variant?: ButtonVariant;
   onClick?: () => void;
   className?: string;
   isLoading?: boolean;
+  disabled?: boolean;
 };
 
 const buttonStyles: Record<ButtonVariant, string> = {
-  [ButtonVariant.PRIMARY]: 'bg-blue-500 hover:bg-blue-600 text-white',
-  [ButtonVariant.SECONDARY]: 'bg-gray-500 hover:bg-gray-600 text-white',
-  [ButtonVariant.SUCCESS]: 'bg-green-500 hover:bg-green-600 text-white',
-  [ButtonVariant.WARNING]: 'bg-yellow-500 hover:bg-yellow-600 text-black',
-  [ButtonVariant.DANGER]: 'bg-red-500 hover:bg-red-600 text-white',
+  [ButtonVariant.PRIMARY]:
+    'bg-blue-500 hover:bg-blue-600 text-white disabled:bg-blue-300',
+  [ButtonVariant.SECONDARY]:
+    'bg-gray-200 hover:bg-gray-300 text-black disabled:bg-gray-200',
+  [ButtonVariant.SUCCESS]:
+    'bg-green-500 hover:bg-green-600 text-white disabled:bg-green-300',
+  [ButtonVariant.WARNING]:
+    'bg-yellow-500 hover:bg-yellow-600 text-black disabled:bg-yellow-300',
+  [ButtonVariant.DANGER]:
+    'bg-red-500 hover:bg-red-600 text-white disabled:bg-red-300',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -31,16 +37,18 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   className = '',
   isLoading = false,
+  disabled = false,
 }) => {
   return (
     <button
       className={clsx(
-        'px-4 py-2 rounded-md transition flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed',
+        'px-4 py-2 rounded-md transition flex items-center justify-center font-semibold',
+        'disabled:cursor-not-allowed disabled:opacity-50',
         buttonStyles[variant],
         className
       )}
-      disabled={isLoading}
-      onClick={!isLoading ? onClick : undefined}
+      disabled={isLoading || disabled}
+      onClick={!isLoading && !disabled ? onClick : undefined}
     >
       {isLoading && (
         <svg
@@ -64,7 +72,11 @@ export const Button: React.FC<ButtonProps> = ({
           />
         </svg>
       )}
-      <span>{label}</span>
+      {typeof label === 'string' ? (
+        <span>{label}</span>
+      ) : (
+        <span className="flex items-center">{label}</span>
+      )}
     </button>
   );
 };

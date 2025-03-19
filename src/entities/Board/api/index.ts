@@ -1,4 +1,4 @@
-import { supabase } from '@/utils/supabaseClient';
+import { supabase } from '@/utils';
 
 export const fetchBoards = async () => {
   const { data, error } = await supabase
