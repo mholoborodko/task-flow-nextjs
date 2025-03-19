@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Icon } from '@/components/shared';
 import { Badge } from '@/components/shared/Badge';
 import { DateFormat } from '@/constants';
@@ -13,7 +15,7 @@ type TaskCardProps = {
   task: Task;
 };
 
-export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+export const TaskCard: React.FC<TaskCardProps> = React.memo(({ task }) => {
   const drawerSwitcher = useToggle(false);
 
   return (
@@ -43,4 +45,4 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       />
     </div>
   );
-};
+});

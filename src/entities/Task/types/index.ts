@@ -1,6 +1,6 @@
 import { TaskPriority, TaskStatus } from '../model';
 
-export type AddTaskRequest = {
+export type AddTaskParams = {
   title: string;
   description: string;
   status: TaskStatus;
@@ -9,6 +9,14 @@ export type AddTaskRequest = {
   boardId: string;
 };
 
-export interface UpdateTaskRequest extends AddTaskRequest {
+export interface UpdateTaskParams extends AddTaskParams {
   id: string;
 }
+
+export type MoveTaskBatchParams = {
+  id: string;
+  title: string;
+  priority: TaskPriority;
+  orderIndex: number;
+  status: TaskStatus;
+}[];

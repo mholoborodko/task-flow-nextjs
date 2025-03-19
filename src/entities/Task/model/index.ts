@@ -19,4 +19,6 @@ export interface Task {
   boardId: string;
   attachments?: string[];
   createdAt?: string;
+  updatedAt?: string;
+  orderIndex: number;
 }

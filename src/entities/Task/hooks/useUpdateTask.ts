@@ -5,13 +5,13 @@ import { QueryKeys } from '@/constants';
 import { updateTask } from '@/entities/Task';
 
 import { Task } from '../model';
-import { UpdateTaskRequest } from '../types';
+import { UpdateTaskParams } from '../types';
 
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (task: UpdateTaskRequest) => updateTask(task),
+    mutationFn: (task: UpdateTaskParams) => updateTask(task),
 
     onSuccess: updatedTask => {
       queryClient.setQueryData(
